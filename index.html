@@ -35,13 +35,27 @@
         while (liveBBEG != false && PlayerHP > 0) 
         {
             alert(pName + " You currently are level " + pLV + " with " + PlayerHP + " hitpoints and have " + gold + " gold and " + fame + " fame." )
-            var activity = prompt("What would you like to do? (Quest), (Rest), or (Downtime)?");
-                if (activity === "Quest") 
+            var activity = prompt("What would you like to do? (Character) Sheet, (Quest), (Rest), or (Downtime)?");
+                if (activity === "Character")
+                
+                {
+                    alert(pName + " You currently are level " + pLV + " with " + PlayerHP + " hitpoints and have " + gold + " gold and " + fame + " fame." )
+                    var Requip = prompt ("Change Equipment? (Y/N)")
+                    if (Requip === "Y")
+                    {
+                        pWep = prompt("Choose a New Weapon.")
+                    }
+                    else
+                    {
+                        alert ("You don't change any equipment")
+                    }
+                }
+                else if (activity === "Quest") 
                 {
                     if (pLV < 100)
                     {
-                        var quest = prompt("You stand before the job board. What quest would you like to undertake? Your options are: (Kill Rats) or (Kill Goblins)")
-                        if (quest === "Kill Rats") 
+                        var quest = prompt("You stand before the job board. What quest would you like to undertake? Your options are: Killing (Rats) or killing (Goblins)")
+                        if (quest === "Rats") 
                         {
         
                             var rats = 5;
@@ -78,7 +92,7 @@
                                 //nothing
                             }
                     }
-                        else if (quest === "Kill Goblins") 
+                        else if (quest === "Goblins") 
                         {
                             alert ("You arrive at the cave that was taken over by the goblins.")
                             var gChoice = prompt("Do you enter the cave? (Y/N)")
