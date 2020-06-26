@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <H1>Game Over</H1>
+    <script type="text/javascript">
+        var PlayerHP = 10;
+        var gold = 0;
+        var XP = 0;
+        var pLV = 1;
+        var maxHP = 10;
+        //so PlayerHp cannot exceed MaxHP
+        //if Evil Ploticus is alive
+        var liveBBEG = true;
+        //if you own a house
+        var HomeOwner = false;
+        var fame = 0;
+        //intro
+        alert ("You are the hero destined to kill the evil overlord Evil Ploticus.")
+        alert ("but you are not ready, first you must prepare...")
+        //character creation
+        alert ("But first you must create your character");
+        var pName = prompt("What is your character's name?");
+        var pRace = prompt("What is your race? I.E. Human, Elf, Dwarf Etc.");
+        var pClass = prompt("What is your character class?");
+        var pWep = prompt("What weapon or spell do you use?");
+        // damage for weapon
+        var pWepDMG = 1;
+        //game
+        alert("You are " + pName + " the " + pRace + " " + pClass)
+        while (liveBBEG != false && PlayerHP > 0) 
+        {
+            alert(pName + " You currently are level " + pLV + " with " + PlayerHP + " hitpoints and have " + gold + " gold and " + fame + " fame." )
+            var activity = prompt("What would you like to do? (Quest), (Rest), or (Downtime)?");
+                if (activity === "Quest") 
+                {
+                    if (pLV < 100)
+                    {
+                        var quest = prompt("You stand before the job board. What quest would you like to undertake? Your options are: (Kill Rats) or (Kill Goblins)")
+                        if (quest === "Kill Rats") 
+                        {
+        
+                            var rats = 5;
+                            alert ("you enter the tavern cellar where several rats scurry about. It is time to get killing.");
+                            for (var rats_killed = 0; rats_killed < 5 && PlayerHP > 0;)
+                            {
+                                alert ("You have " + PlayerHP + " HP left");
+                                alert ("There are " + rats + " rats left");
+                                var attack = prompt("Attack a rat? (Y/N)")
+                                if (attack === "Y")
+                                {
+                                alert ("You attack with your " + pWep)
+                                rats_killed += 1;
+                                rats -= 1;
+                                PlayerHP -= 1;
+                                alert (rats_killed + " rats killed");
+                                }
+                                else if (attack === "N") 
+                                {
+                                alert ("you take a rest");
+                                PlayerHP += 1;
+                                }
+                            }
+                            if (PlayerHP > 0)
+                            {
+                                alert ("You have killed all of the rats and recieve 50 gold. You also find pictures of their families... you monster.");
+                                gold += 50;
+                                pLV += 1;
+                                maxHP += 10;
+                                fame =+ 1;
+                            }
+                            else
+                            {
+                                //nothing
+                            }
+                    }
+                        else if (quest === "Kill Goblins") 
+                        {
+                            alert ("You arrive at the cave that was taken over by the goblins.")
+                            var gChoice = prompt("Do you enter the cave? (Y/N)")
+                            var goblins = 10;
+                            var mimic = true;
+                            if (gChoice = "Y")
+                            {
+                                alert ("You enter the cave.")
+                                for (var goblins_killed = 0; goblins_killed < 10 && PlayerHP > 0;)
+                                {
+                                    alert ("You have " + PlayerHP + " HP left");
+                                    alert ("There are " + goblins + " goblins left");
+                                    if (goblins < 2)
+                                    {
+                                        var enter = prompt ("You find the boss room. Do you enter (Y/N?)")
+                                        if (enter === "Y")
+                                        {
+                                            alert ("The goblin boss is an tough opponent")
+                                            playerHP -= -20;
+                                            alert ("But you persevere and slay it.")
+                                            goblins_killed += 1;
+                                            goblins -= 1;
+                                        }
+                                        else
+                                        {
+                                            alert ("You decide to take a rest first.")
+                                            PlayerHP += 1;
+                                        }
+
+                                    }
+                                    else if (goblins < 6 && mimic == true)
+                                    {
+                                        var chest = prompt("You find a treasure chest. Do you open it? (Y/N)")
+                                        if (chest === "Y")
+                                        {
+                                            alert ("The chest was a mimic and it bites you.")
+                                            PlayerHP -= 10;
+                                            mimic = false;
+                                        }
+                                        else
+                                        {
+                                            alert ("You wisely ignore it sensing a trap")
+                                            mimic = false
+                                        }
+                                    }
+                                    else 
+                                    {
+                                        var attack = prompt("Attack a goblins? (Y/N)")
+                                        if (attack === "Y")
+                                        {
+                                        alert ("You attack with your " + pWep)
+                                        goblins_killed += 1;
+                                        goblins -= 1;
+                                        PlayerHP -= 2;
+                                        alert (goblins_killed + " goblins killed");
+                                        }
+                                        else if (attack === "N") 
+                                        {
+                                        alert ("you take a rest");
+                                        PlayerHP += 1;
+                                        }
+                                    }
+                                }
+                                    if (PlayerHP > 0)
+                                    {
+                                        alert ("You have killed all of the goblins and recieve 100 gold. The farmers are thankful");
+                                        gold += 100;
+                                        pLV += 1;
+                                        maxHP += 10;
+                                        fame =+ 5;
+                                    }
+                                    else
+                                    {
+                                        //nothing
+                                    }
+                            }
+                            else
+                            {
+                                alert ("You go leave the cave like a chicken baby.")
+                            }
+
+                        }
+                        else 
+                        {
+                            alert ("you rest for the day.")
+                        }
+                    }
+                    else
+                    {
+                        alert("You are ready to face the evil overlord Evil Ploticus");
+                        alert("After a mighty battle you slay Evil Ploticus");
+                        liveBBEG = false;
+                    }
+                }
+                else if (activity === "Rest")
+                {
+                    var rest = prompt("Will you stay at an (Inn), on the (Street) or at (Home)?")
+                        if (rest === "Inn")
+                        {
+                            alert ("You spend the night at the local Inn.")
+                            PlayerHP = maxHP;
+                            alert ("You now have " + PlayerHP + " HP");
+                            gold =- 10;
+                        }
+                        else if (rest === "Street")
+                        {
+                            alert ("You are arrested and charged with vagrancy. You pay a 10 gold Fine")
+                            gold =- 10;
+
+                        }
+                        else if (rest === "Home")
+                        {
+                            if (HomeOwner != true)
+                            {
+                                alert ("You don't have a house.")
+                                
+                            }
+                            else
+                            {
+                                alert ("You spend the night at home.")
+                                PlayerHP = maxHP;
+                                alert ("You now have " + PlayerHP + " HP");
+                            }
+                        }
+                        else
+                        {
+                            alert ("You decide not to rest.")
+                        }  
+                    }
+                else if (activity === "Downtime")
+                {
+                    var downtime = prompt("Will you (Shop), (Train), (Drink) at the tavern, go to a (Brothel), or (Pray)?")
+                    if (downtime === "Shop")
+                    {
+                        var purchase = prompt("What will you buy? A (House)?")
+                        {
+                        if (purchase === "House")
+                        {
+                            if (gold < 1000)
+                            {
+                                alert ("A house is 1000 GP, you cannot afford it.")
+                            }
+                            else
+                            {
+                                alert ("You are not a homeowner.")
+                                HomeOwner = true;
+                                gold -= 1000;
+                            }
+                        }
+                        else
+                        {
+                            alert ("You do some window shopping")
+                        }
+                        }
+                    }
+                    else if (downtime === "Train")
+                    {
+                        alert ("You do some training")
+                    }
+                    else if (downtime === "Drink")
+                    {
+                        var drink = prompt("Do you drink (Beer) quietly or start a (Bar Fight)?")
+                        if (drink === "Beer")
+                        {
+                            alert ("You drink a few beers.")
+                            gold -= 5;
+                        }
+                        else if (drink === "Bar Fight")
+                        {
+                            alert("You get your butt kicked and thrown out of the tavern.")
+                            PlayerHP -= 5;
+                        }
+                    }
+                    else if (downtime === "Brothel")
+                    {
+                        alert ("The brothel was actually run by Succubi and they drain your soul.")
+                        PlayerHP = 0;
+                    }
+                    else if (downtime === "Pray")
+                    {
+                        var church = prompt("Which god do you pray to? (Stormon) the God of Storms, (Other), or (None)")
+                        if (church = "Stormon")
+                        {
+                            alert ("You read from The Book of Stormon")
+                        }
+                        else if (church = "Other")
+                        {
+                            alert ("You pray to some other god.")
+                        }
+                        else 
+                        {
+                            alert ("You choose not to pray, look at you, you edgy little athiest.")
+                        }
+                    }
+                    else
+                    {
+                        alert ("You don't have any downtime")
+                    }
+                }
+                else 
+                {
+                    alert ("you do nothing")
+                }
+    }
+    if (PlayerHP <= 0)
+    {
+        alert("You have died");
+    }
+    else if (liveBBEG = false)
+    {
+        alert("You have slain Evil Ploticus")
+    }
+    </script>
+</body>
+</html>
