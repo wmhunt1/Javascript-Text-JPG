@@ -13,6 +13,7 @@
         var XP = 0;
         var pLV = 1;
         var maxHP = 100;
+        var armor = 0;
         //so PlayerHp cannot exceed MaxHP
         //if Evil Ploticus is alive
         var liveBBEG = true;
@@ -54,7 +55,7 @@
                 }
                 else if (activity === "Quest") 
                 {
-                    if (pLV < 100)
+                    if (pLV < 999)
                     {
                         var quest = prompt("You stand before the job board. What quest would you like to undertake? Your options are: Killing (Rats) in the tavern cellar, clearing a cave (Goblins), or investigating a crypt overun by (Zombies)")
                         if (quest === "Rats") 
@@ -72,7 +73,7 @@
                                 alert ("You attack with your " + pWep)
                                 rats_killed += 1;
                                 rats -= 1;
-                                PlayerHP -= 1;
+                                PlayerHP -= (1 - armor);
                                 alert (rats_killed + " rats killed");
                                 }
                                 else if (attack === "N") 
@@ -113,7 +114,7 @@
                                         if (enter === "Y")
                                         {
                                             alert ("The goblin boss is an tough opponent")
-                                            playerHP -= -20;
+                                            playerHP -= (20 - armor);
                                             alert ("But you persevere and slay it.")
                                             goblins_killed += 1;
                                             goblins -= 1;
@@ -131,7 +132,7 @@
                                         if (chest === "Y")
                                         {
                                             alert ("The chest was a mimic and it bites you.")
-                                            PlayerHP -= 10;
+                                            PlayerHP -= (10 - armor);
                                             mimic = false;
                                         }
                                         else
@@ -148,7 +149,7 @@
                                         alert ("You attack with your " + pWep)
                                         goblins_killed += 1;
                                         goblins -= 1;
-                                        PlayerHP -= 2;
+                                        PlayerHP -= (2 - armor);
                                         alert (goblins_killed + " goblins killed");
                                         }
                                         else if (attack === "N") 
@@ -162,8 +163,8 @@
                                     {
                                         alert ("You have killed all of the goblins and recieve 100 gold. The farmers are thankful");
                                         gold += 100;
-                                        pLV += 1;
-                                        maxHP += 10;
+                                        pLV += 2;
+                                        maxHP += 20;
                                         fame =+ 5;
                                     }
                                     else
@@ -205,7 +206,7 @@
                                     {
                                         alert ("You kill the zombies and move into what appears to be a workshop where the necromancer is at work")
                                         alert ("You need to dispatch the mimions before the master. However the necromancer does get off a few spells at you.")
-                                        PlayerHP -= 20;
+                                        PlayerHP -= (20 - armor);
                                         Room3 = true;
                                     }
                                     else if (zombies < 10 && Room2 == false)
@@ -249,8 +250,8 @@
                                         else
                                         {
                                             gold += 500;
-                                            pLV += 1;
-                                            maxHP += 10;
+                                            pLV += 4;
+                                            maxHP += 40;
                                             fame =+ 10;
                                         }
                                     }
@@ -316,7 +317,7 @@
                     var downtime = prompt("Will you (Shop), (Train), (Drink) at the tavern, go to a (Brothel), or (Pray)?")
                     if (downtime === "Shop")
                     {
-                        var purchase = prompt("What will you buy? A (House)?")
+                        var purchase = prompt("What will you buy? A (House) or (Armor)?")
                         {
                         if (purchase === "House")
                         {
@@ -331,6 +332,17 @@
                                 gold -= 1000;
                             }
                         }
+                        else if (purchase === "Armor")
+                        if (gold < 100)
+                            {
+                                alert ("New armor is 100 GP, you cannot afford it.")
+                            }
+                            else
+                            {
+                                alert ("You buy better armor.")
+                                armor += 1;
+                                gold -= 100;
+                            }
                         else
                         {
                             alert ("You do some window shopping")
