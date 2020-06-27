@@ -8,11 +8,11 @@
 <body>
     <H1>Game Over</H1>
     <script type="text/javascript">
-        var PlayerHP = 10;
+        var PlayerHP = 100;
         var gold = 0;
         var XP = 0;
         var pLV = 1;
-        var maxHP = 10;
+        var maxHP = 100;
         //so PlayerHp cannot exceed MaxHP
         //if Evil Ploticus is alive
         var liveBBEG = true;
@@ -23,15 +23,17 @@
         alert ("You are the hero destined to kill the evil overlord Evil Ploticus.")
         alert ("but you are not ready, first you must prepare...")
         //character creation
-        alert ("But first you must create your character");
+        /*alert ("But first you must create your character");
         var pName = prompt("What is your character's name?");
         var pRace = prompt("What is your race? I.E. Human, Elf, Dwarf Etc.");
         var pClass = prompt("What is your character class?");
-        var pWep = prompt("What weapon or spell do you use?");
+        var pWep = prompt("What weapon or spell do you use?");*/
         // damage for weapon
+        var pName = "Player";
+        var pWep = "Dagger";
         var pWepDMG = 1;
         //game
-        alert("You are " + pName + " the " + pRace + " " + pClass)
+        //alert("You are " + pName + " the " + pRace + " " + pClass)
         while (liveBBEG != false && PlayerHP > 0) 
         {
             alert(pName + " You currently are level " + pLV + " with " + PlayerHP + " hitpoints and have " + gold + " gold and " + fame + " fame." )
@@ -54,7 +56,7 @@
                 {
                     if (pLV < 100)
                     {
-                        var quest = prompt("You stand before the job board. What quest would you like to undertake? Your options are: Killing (Rats) or killing (Goblins)")
+                        var quest = prompt("You stand before the job board. What quest would you like to undertake? Your options are: Killing (Rats) in the tavern cellar, clearing a cave (Goblins), or investigating a crypt overun by (Zombies)")
                         if (quest === "Rats") 
                         {
         
@@ -175,9 +177,96 @@
                             }
 
                         }
+                        else if (quest === "Zombies")
+                        {
+                            var Necromancer = true;
+                            var zombies = 21;  
+                            var Room1 = false;
+                            var Room2 = false;
+                            var Room2 = false;
+                            var Room3 = false;
+                            alert ("You arrive at the crypt where several zombies are milling about")
+                            var zChoice1 = prompt ("Do you engage the zombies? (Y/N)")
+                            if (zChoice1 === "Y")
+                            {
+                                alert ("You engage the zombies.")
+                                for (var zombies_killed = 0; zombies_killed < 21 && PlayerHP > 0;)
+                                {
+                                    alert ("You have " + PlayerHP + " HP left");
+                                    if (zombies < 2)
+                                    {
+                                        alert ("Now only the necromancer stands before you. Without his minions he goes down easily.")
+                                        zombies_killed += 1;
+                                        zombies -= 1;
+                                        Necromancer = false;
+
+                                    }
+                                    else if (zombies < 5 && Room3 == false)
+                                    {
+                                        alert ("You kill the zombies and move into what appears to be a workshop where the necromancer is at work")
+                                        alert ("You need to dispatch the mimions before the master. However the necromancer does get off a few spells at you.")
+                                        PlayerHP -= 20;
+                                        Room3 = true;
+                                    }
+                                    else if (zombies < 10 && Room2 == false)
+                                    {
+                                        alert ("You kill the zombies in that room and move on to the next room. This room is filled with fancier coffins.")
+                                        Room2 = true;
+                                    }
+                                    else if (zombies < 16 && Room1 == false)
+                                    {
+                                        alert ("you Enter the crypt")
+                                        alert ("In the entry way there are more zombies to slay.")
+                                        Room1 = true;
+                                    }
+                                    else
+                                    {
+                                        var attack = prompt("Attack a zombie? (Y/N)")
+                                        if (attack === "Y")
+                                        {
+                                        alert ("You attack with your " + pWep)
+                                        zombies_killed += 1;
+                                        zombies -= 1;
+                                        PlayerHP -= 4;
+                                        alert (zombies_killed + " zombies killed");
+                                        }
+                                        else if (attack === "N") 
+                                        {
+                                        alert ("you take a rest");
+                                        PlayerHP += 1;
+                                        }
+                                    }
+                                }
+                                if (PlayerHP > 0)
+                                    {
+                                        alert ("You have ended the necromancer's reign");
+                                        var zChoice2 = prompt ("You find a strange book among the necromancer's belongings. Do you (Take it) for yourself or (Burn it)?")
+                                        if (zChoice2 === "Take it")
+                                        {
+                                            alert ("It was the Necronomicon. The Necronomicon steals your soul killing you")
+                                            playerHP = 0;
+                                        }
+                                        else
+                                        {
+                                            gold += 500;
+                                            pLV += 1;
+                                            maxHP += 10;
+                                            fame =+ 10;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        //nothing
+                                    }
+                            }
+                            else
+                            {
+                                alert("You decide that the zombies aren't worth it and leave.")
+                            }
+                        }
                         else 
                         {
-                            alert ("you rest for the day.")
+                            alert ("You do nothing.")
                         }
                     }
                     else
